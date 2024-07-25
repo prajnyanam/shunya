@@ -93,6 +93,7 @@ else
   # --env="DISPLAY" : pass the DISPLAY
   # --env="QT_X11_NO_MITSHM=1" : pass the QT_X11_NO_MITSHM
   # --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" : mount the X11 socket
+  # -d : run the container in the background (detach)
  
   docker run \
     $GPU_FLAGS \
@@ -101,6 +102,7 @@ else
     -h $NAME \
     -v "$CODEBASE_DIR:/shunya:rw" \
     -w "/shunya" \
+    -d \
     --privileged --network host --env="DISPLAY" \
     --env="QT_X11_NO_MITSHM=1"   \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
