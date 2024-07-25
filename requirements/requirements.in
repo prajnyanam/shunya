@@ -1,0 +1,12 @@
+--find-links https://download.pytorch.org/whl/cu118
+
+torch==2.1.2
+torchvision==0.16.2
+torchaudio==2.1.2
+# PyTorch <= 2.1: Can work with any NumPy version, but the .numpy() and .from_numpy() functions will 
+# only work if the installed NumPy version is < 2.0.
+numpy<2
+scipy
+matplotlib
+opencv-python
+pip-tools
