@@ -39,3 +39,18 @@
 
 3. **Verify NVIDIA Integration**
    - Check that you can run `nvidia-smi` inside the Docker container to confirm that the NVIDIA setup is working correctly.
+
+## Getting started with bazel
+
+1. **Building the binary**
+   - In the root directory, execute:
+     ```bash
+     bazel build //examples/basic:hello_world_py
+     bazel build //examples/basic:hello_world
+     ```
+2. **Running the binary**
+   - In the root directory, execute:
+     ```bash
+     bazel run //examples/basic:hello_world_py
+     bazel run //examples/basic:hello_world
+     ```

@@ -24,7 +24,7 @@ fi
 # Script to start the docker and attach the codebase to the container
 docker run \
   $GPU_FLAGS \
-  -it --rm \
+  -it \
   --name $NAME \
   -h $NAME \
   -v "$CODEBASE_DIR:/shunya" \
