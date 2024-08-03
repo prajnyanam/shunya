@@ -1,5 +1,5 @@
 # Use the specified NVIDIA CUDA base image
-FROM nvidia/cuda:11.8.0-base-ubuntu22.04
+FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
 
 # Set the working directory
 WORKDIR /shunya
