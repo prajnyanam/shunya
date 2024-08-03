@@ -1,0 +1,13 @@
+load("@rules_cuda//cuda:defs.bzl", "cuda_test")
+
+package(default_visibility = ["//visibility:public"])
+
+cc_binary(
+    name = "simple_example_cc",
+    srcs = ["simple_example.cc"],
+)
+
+cuda_test(
+    name = "simple_example",
+    srcs = ["simple_example.cu"],
+)
