@@ -1,0 +1,12 @@
+
+# Example binary
+cc_binary(
+    name = "hello_world",
+    srcs = ["hello_world.cc", "hello_world.h"],
+)
+
+py_binary(
+    name = "hello_world_py",
+    srcs = ["hello_world.py"],
+    main = "hello_world.py",
+)
