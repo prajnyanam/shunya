@@ -13,6 +13,9 @@ USER=$(whoami)
 HOME="${HOME:-/home/${USER}}"
 CODEBASE_DIR="${CODEBASE_DIR:-${HOME}/shunya}"
 
+# Do not change this, this is linked to the dockerfile name
+DOCKER_USER="ian"
+
 # Adding the GPU flags
 GPU_FLAGS="--gpus=all"
 
@@ -21,11 +24,18 @@ if [[ "$1" != "--dev" ]]; then
   docker pull $IMAGE_NAME
 fi
 
+# Mount gitconfig file
+GIT_CONFIG_DIR="${HOME}/.gitconfig"
+GIT_FLAGS="-v $GIT_CONFIG_DIR:/etc/gitconfig:ro"
+SSH_FLAGS="-v $HOME/.ssh:/home/$DOCKER_USER/.ssh:ro"
+
 # Script to start the docker and attach the codebase to the container
 docker run \
   $GPU_FLAGS \
   -it \
   --name $NAME \
   -h $NAME \
+  $GIT_FLAGS \
+  $SSH_FLAGS \
   -v "$CODEBASE_DIR:/shunya" \
   $IMAGE_NAME
