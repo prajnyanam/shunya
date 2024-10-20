@@ -2,6 +2,13 @@
 
 NAME="dev"
 
+# Check if the container is running
+if [ "$(docker ps -a -q -f name=$NAME)" ]; then
+    echo "Stopping and removing the running container: $NAME"
+    docker stop $NAME
+    docker rm $NAME
+fi
+
 # Check if --dev argument is passed
 if [[ "$1" == "--dev" ]]; then
   IMAGE_NAME="shunya-dev:latest"
