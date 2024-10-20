@@ -12,3 +12,9 @@ http_archive(
 load("@rules_cuda//cuda:repositories.bzl", "register_detected_cuda_toolchains", "rules_cuda_dependencies")
 rules_cuda_dependencies()
 register_detected_cuda_toolchains()
+
+http_archive(
+    name = "catch2",
+    urls = ["https://github.com/catchorg/Catch2/archive/refs/tags/v3.6.0.zip"], 
+    strip_prefix = "Catch2-3.6.0",  
+)
