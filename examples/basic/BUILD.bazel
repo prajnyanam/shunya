@@ -1,12 +1,15 @@
-
 # Example binary
-cc_binary(
+load("//bazel_rules:cc_rules.bzl", "cc_binary_with_headers") 
+
+cc_binary_with_headers(
     name = "hello_world",
-    srcs = ["hello_world.cc", "hello_world.h"],
+    srcs = ["src/hello_world.cc"],  
+    hdrs = ["include/hello_world.h"],  
+    includes = ["include"],  
 )
 
 py_binary(
     name = "hello_world_py",
-    srcs = ["hello_world.py"],
-    main = "hello_world.py",
+    srcs = ["scripts/hello_world.py"],
+    main = "scripts/hello_world.py",
 )

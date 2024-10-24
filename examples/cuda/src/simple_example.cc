@@ -1,4 +1,4 @@
-#include "examples/cuda/simple_example.h"
+#include "../include/simple_example.h"
 
 #include <iostream>
 #include <math.h>
