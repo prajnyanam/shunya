@@ -4,7 +4,7 @@ package(default_visibility = ["//visibility:public"])
 
 cc_binary(
     name = "simple_example_cc",
-    srcs = ["simple_example.cc"],
+    srcs = ["src/simple_example.cc"],
     deps = [
         ":simple_example"
     ],
@@ -12,6 +12,6 @@ cc_binary(
 
 cuda_library(
     name = "simple_example",
-    hdrs = ["simple_example.h"],
-    srcs = ["simple_example.cu"],
+    hdrs = ["include/simple_example.h"],
+    srcs = ["src/simple_example.cu"],
 )

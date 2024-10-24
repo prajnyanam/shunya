@@ -4,9 +4,51 @@ NAME="dev"
 
 # Check if the container is running
 if [ "$(docker ps -a -q -f name=$NAME)" ]; then
-    echo "Stopping and removing the running container: $NAME"
-    docker stop $NAME
-    docker rm $NAME
+    # Check if the container is running
+    if [ "$(docker ps -q -f name=$NAME)" ]; then
+        echo "Container $NAME is already running."
+
+        # Prompt the user for action
+        read -p "Do you want to (l)ogin to the existing container or (r)emove and restart it? (l/r): " choice
+
+        case "$choice" in
+            l|L )
+                echo "Logging into the existing container: $NAME"
+                docker exec -it $NAME /bin/bash  # or /bin/sh depending on your container's shell
+                ;;
+            r|R )
+                echo "Stopping and removing the running container: $NAME"
+                docker stop $NAME
+                docker rm $NAME
+                ;;
+            * )
+                echo "Invalid option. Please enter 'l' to login or 'r' to remove."
+                ;;
+        esac
+    else
+        echo "Container $NAME exists but is not running."
+
+        # Prompt the user for action
+        read -p "Do you want to (s)tart it or (r)emove it? (s/r): " choice
+
+        case "$choice" in
+            s|S )
+                echo "Starting the container: $NAME"
+                docker start $NAME
+                echo "Logging into the container: $NAME"
+                docker exec -it $NAME /bin/bash  # or /bin/sh depending on your container's shell
+                ;;
+            r|R )
+                echo "Removing the container: $NAME"
+                docker rm $NAME
+                ;;
+            * )
+                echo "Invalid option. Please enter 's' to start or 'r' to remove."
+                ;;
+        esac
+    fi
+else
+    echo "No existing container named $NAME found."
 fi
 
 # Check if --dev argument is passed
