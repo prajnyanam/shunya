@@ -1,0 +1,7 @@
+genrule(
+    name = "lint",
+    srcs = glob(["**/*.cc"]) + glob(["**/*.h"]),  # Include all .cc and .h files
+    outs = ["lint_report.txt"],
+    cmd = "clang-tidy $(SRCS) -- -std=c++17 > $@ 2>&1",  # Run clang-tidy
+    visibility = ["//visibility:public"],  # Ensure visibility if needed
+)

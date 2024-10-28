@@ -1,0 +1,3 @@
+# .clang-tidy
+Checks: '-*,clang-analyzer-*'  # Enable all clang-analyzer checks
+WarningsAsErrors: '*'
