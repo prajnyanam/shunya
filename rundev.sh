@@ -2,21 +2,46 @@
 
 NAME="dev"
 
-# Check if the container is running
-if [ "$(docker ps -a -q -f name=$NAME)" ]; then
-    echo "Stopping and removing the running container: $NAME"
-    docker stop $NAME
-    docker rm $NAME
-fi
+# Usage function
+DEV_ARG=false
+ROOT_USER_ARG=false
+
+# Parse arguments
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --dev)
+            DEV_ARG=true
+            shift
+            ;;
+        --root)
+            ROOT_USER_ARG=true
+            shift
+            ;;
+    esac
+done
+
+echo "DEV_ARG: $DEV_ARG"
+echo "ROOT_USER_ARG: $ROOT_USER_ARG"
 
 # Check if --dev argument is passed
-if [[ "$1" == "--dev" ]]; then
+if [ "$DEV_ARG" = true ]; then
   IMAGE_NAME="shunya-dev:latest"
 else
   IMAGE_NAME="vatsa821/shunya-dev:latest"
 fi
 
+echo "IMAGE_NAME: $IMAGE_NAME"
+
+ROOT_USER_FLAG=""
+# Check if --root argument is passed
+if [ "$ROOT_USER_ARG" = true ]; then
+  ROOT_USER_FLAG="--user root"
+fi
+
 USER=$(whoami)
+
+echo "USER: $USER"
+
 HOME="${HOME:-/home/${USER}}"
 CODEBASE_DIR="${CODEBASE_DIR:-${HOME}/shunya}"
 
@@ -27,7 +52,7 @@ DOCKER_USER="ian"
 GPU_FLAGS="--gpus=all"
 
 # Pull the latest version of the Docker image
-if [[ "$1" != "--dev" ]]; then
+if [ "$ROOT_USER_FLAG" = true ]; then
   docker pull $IMAGE_NAME
 fi
 
@@ -38,6 +63,7 @@ SSH_FLAGS="-v $HOME/.ssh:/home/$DOCKER_USER/.ssh:ro"
 
 # Script to start the docker and attach the codebase to the container
 docker run \
+  $ROOT_USER_FLAG \
   $GPU_FLAGS \
   -it \
   --name $NAME \
