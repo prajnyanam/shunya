@@ -1,0 +1,6 @@
+[submodule "thirdparty/ros2/rcl"]
+	path = thirdparty/ros2/rcl
+	url = git@github.com:prajnyanam/rcl.git
+[submodule "thirdparty/ros2/rcutils"]
+	path = thirdparty/ros2/rcutils
+	url = git@github.com:ros2/rcutils.git

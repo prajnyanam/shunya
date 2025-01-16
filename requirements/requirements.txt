@@ -18,6 +18,8 @@ contourpy==1.2.1
     # via matplotlib
 cycler==0.12.1
     # via matplotlib
+empy==4.2
+    # via -r requirements/requirements.in
 filelock==3.15.4
     # via
     #   torch
