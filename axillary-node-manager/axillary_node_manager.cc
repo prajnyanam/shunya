@@ -1,9 +1,9 @@
-#include "includes/axillary_node_manager.h"
-#include "includes/standby_state.h"
-#include "includes/wait_for_command_state.h"
-#include "includes/surveillance_mode_state.h"
-#include "includes/chase_mode_state.h"
-#include "includes/shutdown_state.h"
+#include "axillary_node_manager.h"
+#include "standby_state.h"
+#include "wait_for_command_state.h"
+#include "surveillance_mode_state.h"
+#include "chase_mode_state.h"
+#include "shutdown_state.h"
 
 namespace axillary_node_manager {
 
@@ -80,5 +80,9 @@ void AxillaryNodeManager::checkForEvents(const InputData& input) {
     m_master_node_miss_counter = 0;
   }
 }
+
+State* AxillaryNodeManager::getCurrentState() const {
+    return m_current_state.get();
+  }
 
 }  // namespace axillary_node_manager

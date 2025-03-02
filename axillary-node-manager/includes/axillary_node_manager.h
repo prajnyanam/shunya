@@ -2,8 +2,8 @@
 
 #include <memory>
 #include "state.h"
-#include "parameters/parameters.h"
-#include "interfaces/interfaces.h"
+#include "../parameters/parameters.h"
+#include "../interfaces/interfaces.h"
 
 namespace axillary_node_manager {
 
@@ -23,6 +23,9 @@ class AxillaryNodeManager {
 
   // Method used by states to request a state transition.
   void changeState(std::unique_ptr<State> new_state);
+
+  // Get new state
+  State* getCurrentState() const;
 
  private:
   // Holds the current state object.

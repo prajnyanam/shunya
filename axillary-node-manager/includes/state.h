@@ -14,7 +14,8 @@ enum class Event {
   eMasterNodeCommLost,
   eSensorFaulted,
   eSensorSuiteCommLost,
-  eHibernationComplete
+  eHibernationComplete,
+  eInitialize,
 };
 
 // Abstract base class for states.
