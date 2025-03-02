@@ -16,18 +16,22 @@ namespace axillary_node_manager {
         heartbeat(0) {};
     };
 
+    struct MasterToManager {
+        int heartbeat;
+
+        MasterToManager() :
+        heartbeat(0) {};
+    };
+
     struct InputData {
-        int sensorHeartbeatCounterThresh;
-        int masterNodeHeartbeatCounterThresh;
         CameraToManager cameraInput;
         RadarToManager radarInput;
+        MasterToManager masterNodeInput;
 
-        InputData(int sensorHeartbeatCounterThresh = 100,
-            int masterNodeHeartbeatCounterThresh = 100) :
-            sensorHeartbeatCounterThresh(sensorHeartbeatCounterThresh), 
-            masterNodeHeartbeatCounterThresh(masterNodeHeartbeatCounterThresh),
+        InputData() :
             cameraInput(),
-            radarInput()
+            radarInput(),
+            masterNodeInput()
             {};
     };
 }
