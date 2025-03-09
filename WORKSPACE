@@ -28,3 +28,24 @@ git_repository(
     commit = "2d9d74e72ecd1eea240412be3dacd413dcb5f680",
     remote = "https://github.com/ros2/rcutils.git",
 )
+
+git_repository(
+    name = "ros2_rcpputils",
+    build_file = "//thirdparty:ros2/rcpputils/rcpputils.BUILD",
+    commit = "f8e638eb72bfbacea18ca1cf67c4f7d48561d9b2",
+    remote = "https://github.com/ros2/rcpputils.git",
+)
+
+git_repository(
+    name = "ros2_rmw",
+    build_file = "//thirdparty:ros2/rmw/rmw.BUILD",
+    commit = "2a4ee718d0da004d5629f50afd2896fbd1f4aedd",
+    remote = "https://github.com/ros2/rmw.git",
+)
+
+git_repository(
+    name = "ros2_rcl_logging",
+    build_file = "//thirdparty:ros2/rcl_logging/rcl_logging.BUILD",
+    commit = "1b7a4e34884005f28eeb04065b5d94565c67b11d",
+    remote = "https://github.com/ros2/rcl_logging.git",
+)
