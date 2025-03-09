@@ -1,0 +1,5 @@
+filegroup(
+    name = "logging_macros",
+    srcs = ["ros2/rcutils/build_logging_macros.py"],
+    visibility = ["//visibility:public"],
+)

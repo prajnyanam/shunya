@@ -1,0 +1,9 @@
+
+cc_test(
+    name = "rcutils_test",
+    srcs = ["rcutils_test.cc"],
+    deps = [
+        "@ros2_rcutils//:rcutils",
+        "@catch2//:catch2_main",
+    ],
+)

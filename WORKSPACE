@@ -1,5 +1,7 @@
 workspace(name = "shunya")
 
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+
 # rules_cuda
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 http_archive(
@@ -17,4 +19,12 @@ http_archive(
     name = "catch2",
     urls = ["https://github.com/catchorg/Catch2/archive/refs/tags/v3.6.0.zip"], 
     strip_prefix = "Catch2-3.6.0",  
+)
+
+
+git_repository(
+    name = "ros2_rcutils",
+    build_file = "//thirdparty:ros2/rcutils/rcutils.BUILD",
+    commit = "2d9d74e72ecd1eea240412be3dacd413dcb5f680",
+    remote = "https://github.com/ros2/rcutils.git",
 )

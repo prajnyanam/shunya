@@ -10,3 +10,11 @@ py_binary(
     srcs = ["hello_world.py"],
     main = "hello_world.py",
 )
+
+cc_binary(
+    name = "rcutils_test",
+    srcs = ["rcutils_test.cc"],
+    deps = [
+        "@ros2_rcutils//:rcutils",
+    ],
+)
