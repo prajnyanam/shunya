@@ -19,10 +19,12 @@ RUN apt-get update && apt-get install -y \
     bash-completion \
     vim
 
-# Install bazel
-RUN wget --no-verbose --read-timeout 1000 https://github.com/bazelbuild/bazel/releases/download/6.5.0/bazel_6.5.0-linux-x86_64.deb \
-  && dpkg -i bazel_6.5.0-linux-x86_64.deb \
-  && rm bazel_6.5.0-linux-x86_64.deb
+# Clone and build Catch2
+RUN git clone https://github.com/catchorg/Catch2.git && \
+    cd Catch2 && \
+    cmake -B build -S . -DBUILD_TESTING=OFF && \
+    cmake --build build/ --target install && \
+    cd .. && rm -rf Catch2
 
 # Install python requirements
 COPY requirements/requirements.txt .
