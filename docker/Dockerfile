@@ -17,7 +17,9 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     libgl1-mesa-glx \
     bash-completion \
-    vim
+    vim \
+    clang-tidy \
+    clang-format
 
 # Clone and build Catch2
 RUN git clone https://github.com/catchorg/Catch2.git && \
