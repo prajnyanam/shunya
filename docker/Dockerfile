@@ -17,7 +17,8 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     libgl1-mesa-glx \
     bash-completion \
-    vim
+    vim \
+    tmux
 
 # Install bazel
 RUN wget --no-verbose --read-timeout 1000 https://github.com/bazelbuild/bazel/releases/download/6.5.0/bazel_6.5.0-linux-x86_64.deb \

@@ -65,6 +65,7 @@ SSH_FLAGS="-v $HOME/.ssh:/home/$DOCKER_USER/.ssh:ro"
 docker run \
   $ROOT_USER_FLAG \
   $GPU_FLAGS \
+  -d \
   -it \
   --name $NAME \
   -h $NAME \
