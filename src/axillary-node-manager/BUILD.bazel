@@ -1,0 +1,26 @@
+cc_library(
+    name = "axillary_node_manager_lib",
+    srcs = [
+        "axillary_node_manager.cc",
+        "standby_state.cc",
+        "wait_for_command_state.cc",
+        "surveillance_mode_state.cc",
+        "chase_mode_state.cc",
+        "hibernate_state.cc",
+        "shutdown_state.cc",
+    ],
+    hdrs = glob([
+        "includes/*.h",
+        "interfaces/*.h",
+        "parameters/*.h",
+    ]),
+    includes = [
+        "includes",
+        "interfaces",
+        "parameters",
+    ],
+    copts = [
+        "-I.",
+    ],
+    visibility = ["//visibility:public"],
+)
