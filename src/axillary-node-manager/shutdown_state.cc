@@ -2,17 +2,17 @@
 #include "standby_state.h"
 #include "shutdown_state.h"
 
-namespace axillary_node_manager {
+namespace axillaryNodeManager {
 
-void Shutdown::onEnter(AxillaryNodeManager& manager) {
+void Shutdown::OnEnter(AxillaryNodeManager& manager) {
   std::cout << "Entering Shutdown state." << std::endl;
 }
 
-void Shutdown::onUpdate(AxillaryNodeManager& manager) {
+void Shutdown::OnUpdate(AxillaryNodeManager& manager) {
   std::cout << "Shutdown::onUpdate - updating Shutdown state." << std::endl;
 }
 
-void Shutdown::onEvent(AxillaryNodeManager& manager, Event event) {
+void Shutdown::OnEvent(AxillaryNodeManager& manager, Event event) {
   switch (event) {
     case Event::eInitialize:
       // Transition to Shutdown state.
@@ -23,4 +23,4 @@ void Shutdown::onEvent(AxillaryNodeManager& manager, Event event) {
   }
 }
 
-}  // namespace axillary_node_manager
+}  // namespace axillaryNodeManager

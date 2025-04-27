@@ -1,23 +1,23 @@
 #include <iostream>
-#include "wait_for_command_state.h"  
-#include "hibernate_state.h"         
+#include "wait_for_command_state.h"
+#include "hibernate_state.h"
 #include "surveillance_mode_state.h"
 #include "chase_mode_state.h"
 
-namespace axillary_node_manager {
+namespace axillaryNodeManager {
 
-void SurveillanceMode::onEnter(AxillaryNodeManager& manager) {
+void SurveillanceMode::OnEnter(AxillaryNodeManager& manager) {
   std::cout << "Entering SurveillanceMode state." << std::endl;
 }
 
-void SurveillanceMode::onUpdate(AxillaryNodeManager& manager) {
+void SurveillanceMode::OnUpdate(AxillaryNodeManager& manager) {
   std::cout << "SurveillanceMode::onUpdate - updating SurveillanceMode state." << std::endl;
 }
 
-void SurveillanceMode::onEvent(AxillaryNodeManager& manager, Event event) {
+void SurveillanceMode::OnEvent(AxillaryNodeManager& manager, Event event) {
   switch (event) {
     case Event::eRunChaseMode:
-      // Transition to SurveillanceMode state.
+      // Transition to ChaseMode state.
       manager.changeState(std::make_unique<ChaseMode>());
       break;
     case Event::eSensorSuiteCommLost:
@@ -29,4 +29,4 @@ void SurveillanceMode::onEvent(AxillaryNodeManager& manager, Event event) {
   }
 }
 
-}  // namespace axillary_node_manager
+}  // namespace axillaryNodeManager

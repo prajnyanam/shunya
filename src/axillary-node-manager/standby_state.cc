@@ -1,19 +1,19 @@
 #include "standby_state.h"
 #include <iostream>
-#include "wait_for_command_state.h"  
-#include "hibernate_state.h"         
+#include "wait_for_command_state.h"
+#include "hibernate_state.h"
 
-namespace axillary_node_manager {
+namespace axillaryNodeManager {
 
-void Standby::onEnter(AxillaryNodeManager& manager) {
+void Standby::OnEnter(AxillaryNodeManager& manager) {
   std::cout << "Entering Standby state." << std::endl;
 }
 
-void Standby::onUpdate(AxillaryNodeManager& manager) {
-  std::cout << "Standby::onUpdate - updating standby state." << std::endl;
+void Standby::OnUpdate(AxillaryNodeManager& manager) {
+  std::cout << "Standby::onUpdate - updating Standby state." << std::endl;
 }
 
-void Standby::onEvent(AxillaryNodeManager& manager, Event event) {
+void Standby::OnEvent(AxillaryNodeManager& manager, Event event) {
   switch (event) {
     case Event::eSensorSuiteReady:
       // Transition to WaitForCommand state.
@@ -29,4 +29,4 @@ void Standby::onEvent(AxillaryNodeManager& manager, Event event) {
   }
 }
 
-}  // namespace axillary_node_manager
+}  // namespace axillaryNodeManager

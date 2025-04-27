@@ -1,19 +1,19 @@
 #include <iostream>
-#include "hibernate_state.h"         
+#include "hibernate_state.h"
 #include "chase_mode_state.h"
 #include "surveillance_mode_state.h"
 
-namespace axillary_node_manager {
+namespace axillaryNodeManager {
 
-void ChaseMode::onEnter(AxillaryNodeManager& manager) {
+void ChaseMode::OnEnter(AxillaryNodeManager& manager) {
   std::cout << "Entering ChaseMode state." << std::endl;
 }
 
-void ChaseMode::onUpdate(AxillaryNodeManager& manager) {
+void ChaseMode::OnUpdate(AxillaryNodeManager& manager) {
   std::cout << "ChaseMode::onUpdate - updating ChaseMode state." << std::endl;
 }
 
-void ChaseMode::onEvent(AxillaryNodeManager& manager, Event event) {
+void ChaseMode::OnEvent(AxillaryNodeManager& manager, Event event) {
   switch (event) {
     case Event::eRunSurveillanceMode:
       // Transition to Surveillance state.
@@ -28,4 +28,4 @@ void ChaseMode::onEvent(AxillaryNodeManager& manager, Event event) {
   }
 }
 
-}  // namespace axillary_node_manager
+}  // namespace axillaryNodeManager

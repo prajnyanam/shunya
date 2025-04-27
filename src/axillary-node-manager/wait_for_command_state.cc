@@ -4,17 +4,17 @@
 #include "surveillance_mode_state.h"
 #include "chase_mode_state.h"
 
-namespace axillary_node_manager {
+namespace axillaryNodeManager {
 
-void WaitForCommand::onEnter(AxillaryNodeManager& manager) {
+void WaitForCommand::OnEnter(AxillaryNodeManager& manager) {
   std::cout << "Entering WaitForCommand state." << std::endl;
 }
 
-void WaitForCommand::onUpdate(AxillaryNodeManager& manager) {
+void WaitForCommand::OnUpdate(AxillaryNodeManager& manager) {
   std::cout << "WaitForCommand::onUpdate - updating WaitForCommand state." << std::endl;
 }
 
-void WaitForCommand::onEvent(AxillaryNodeManager& manager, Event event) {
+void WaitForCommand::OnEvent(AxillaryNodeManager& manager, Event event) {
   switch (event) {
     case Event::eRunSurveillanceMode:
       // Transition to WaitForCommand state.
@@ -33,4 +33,4 @@ void WaitForCommand::onEvent(AxillaryNodeManager& manager, Event event) {
   }
 }
 
-}  // namespace axillary_node_manager
+}  // namespace axillaryNodeManager

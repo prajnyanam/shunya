@@ -1,26 +1,26 @@
 #include <iostream>
-#include "hibernate_state.h"         
+#include "hibernate_state.h"
 #include "wait_for_command_state.h"
 #include "shutdown_state.h"
 
-namespace axillary_node_manager {
+namespace axillaryNodeManager {
 
-void Hibernate::onEnter(AxillaryNodeManager& manager) {
+void Hibernate::OnEnter(AxillaryNodeManager& manager) {
   std::cout << "Entering Hibernate state." << std::endl;
 }
 
-void Hibernate::onUpdate(AxillaryNodeManager& manager) {
+void Hibernate::OnUpdate(AxillaryNodeManager& manager) {
   std::cout << "Hibernate::onUpdate - updating Hibernate state." << std::endl;
 }
 
-void Hibernate::onEvent(AxillaryNodeManager& manager, Event event) {
+void Hibernate::OnEvent(AxillaryNodeManager& manager, Event event) {
   switch (event) {
     case Event::eHibernationComplete:
-      // Transition to Hibernate state.
+      // Transition to Shutdown state.
       manager.changeState(std::make_unique<Shutdown>());
       break;
     case Event::eSensorSuiteReady:
-      // Transition to Hibernate state.
+      // Transition to WaitForCommand state.
       manager.changeState(std::make_unique<WaitForCommand>());
       break;
     default:
@@ -28,4 +28,4 @@ void Hibernate::onEvent(AxillaryNodeManager& manager, Event event) {
   }
 }
 
-}  // namespace axillary_node_manager
+}  // namespace axillaryNodeManager
