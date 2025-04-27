@@ -7,11 +7,11 @@ namespace axillary_node_manager {
 
 class WaitForCommand : public State {
  public:
-  void onEnter(AxillaryNodeManager& manager) override;
+  void OnEnter(AxillaryNodeManager& manager) override;
 
-  void onUpdate(AxillaryNodeManager& manager) override;
+  void OnUpdate(AxillaryNodeManager& manager) override;
 
-  void onEvent(AxillaryNodeManager& manager, Event event) override;
+  void OnEvent(AxillaryNodeManager& manager, Event event) override;
 };
 
 }  // namespace axillary_node_manager

@@ -6,27 +6,27 @@
 
 namespace axillary_node_manager {
 
-void WaitForCommand::onEnter(AxillaryNodeManager& manager) {
+void WaitForCommand::OnEnter(AxillaryNodeManager& manager) {
   std::cout << "Entering WaitForCommand state." << std::endl;
 }
 
-void WaitForCommand::onUpdate(AxillaryNodeManager& manager) {
+void WaitForCommand::OnUpdate(AxillaryNodeManager& manager) {
   std::cout << "WaitForCommand::onUpdate - updating WaitForCommand state." << std::endl;
 }
 
-void WaitForCommand::onEvent(AxillaryNodeManager& manager, Event event) {
+void WaitForCommand::OnEvent(AxillaryNodeManager& manager, Event event) {
   switch (event) {
     case Event::eRunSurveillanceMode:
       // Transition to WaitForCommand state.
-      manager.changeState(std::make_unique<SurveillanceMode>());
+      manager.ChangeState(std::make_unique<SurveillanceMode>());
       break;
     case Event::eRunChaseMode:
       // Transition to WaitForCommand state.
-      manager.changeState(std::make_unique<ChaseMode>());
+      manager.ChangeState(std::make_unique<ChaseMode>());
       break;
     case Event::eSensorSuiteCommLost:
       // Transition to Hibernate state.
-      manager.changeState(std::make_unique<Hibernate>());
+      manager.ChangeState(std::make_unique<Hibernate>());
       break;
     default:
       break;
