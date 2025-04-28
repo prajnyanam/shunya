@@ -4,6 +4,11 @@ FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
 # Set the working directory
 WORKDIR /shunya
 
+
+# Add safe directory for git to avoid dubious ownership warnings
+RUN git config --global --add safe.directory /shunya
+
+
 # Install basic dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
@@ -30,6 +35,12 @@ RUN git clone https://github.com/catchorg/Catch2.git && \
 # Install python requirements
 COPY requirements/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+
+# Download Git autocomplete script
+RUN curl -o /etc/bash_completion.d/git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+
+# Enable autocomplete in Bash for all users
+RUN echo "source /etc/bash_completion.d/git-completion.bash" >> /etc/bash.bashrc
 
 ARG USER=ian
 ARG GROUP=prajnyanam
