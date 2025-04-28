@@ -31,6 +31,16 @@ RUN git clone https://github.com/catchorg/Catch2.git && \
 COPY requirements/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Download Git autocomplete script
+RUN curl -o /etc/bash_completion.d/git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+
+# Enable autocomplete in Bash for all users
+RUN echo "source /etc/bash_completion.d/git-completion.bash" >> /etc/bash.bashrc
+
+# Add safe directory for git to avoid dubious ownership warnings
+RUN git config --global --add safe.directory /shunya
+
+
 ARG USER=ian
 ARG GROUP=prajnyanam
 
