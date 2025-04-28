@@ -4,11 +4,6 @@ FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
 # Set the working directory
 WORKDIR /shunya
 
-
-# Add safe directory for git to avoid dubious ownership warnings
-RUN git config --global --add safe.directory /shunya
-
-
 # Install basic dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
@@ -41,6 +36,10 @@ RUN curl -o /etc/bash_completion.d/git-completion.bash https://raw.githubusercon
 
 # Enable autocomplete in Bash for all users
 RUN echo "source /etc/bash_completion.d/git-completion.bash" >> /etc/bash.bashrc
+
+# Add safe directory for git to avoid dubious ownership warnings
+RUN git config --global --add safe.directory /shunya
+
 
 ARG USER=ian
 ARG GROUP=prajnyanam
