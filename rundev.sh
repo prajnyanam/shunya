@@ -52,14 +52,19 @@ DOCKER_USER="ian"
 GPU_FLAGS="--gpus=all"
 
 # Pull the latest version of the Docker image
-if [ "$ROOT_USER_FLAG" = true ]; then
+if [ "$DEV_ARG" = !true ]; then
   docker pull $IMAGE_NAME
 fi
 
 # Mount gitconfig file
 GIT_CONFIG_DIR="${HOME}/.gitconfig"
 GIT_FLAGS="-v $GIT_CONFIG_DIR:/etc/gitconfig:ro"
-SSH_FLAGS="-v $HOME/.ssh:/home/$DOCKER_USER/.ssh:ro"
+# Mount ssh keys base on user 
+if [ "$ROOT_USER_ARG" = true ]; then
+  SSH_FLAGS="-v $HOME/.ssh:/root/.ssh:ro"
+else
+  SSH_FLAGS="-v $HOME/.ssh:/home/$DOCKER_USER/.ssh:ro"
+fi
 
 # Script to start the docker and attach the codebase to the container
 docker run \
