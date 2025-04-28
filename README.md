@@ -36,6 +36,9 @@
      ```bash
      ./rundev.sh
      ```
+      - The script accepts the following flags:
+         - `--root`: Logs you in with sudo permissions if you want to play with the image.
+         - `--dev`: Use this when you want to run the images that was built using `./docker/build.sh`.
 
 3. **Verify NVIDIA Integration**
    - Check that you can run `nvidia-smi` inside the Docker container to confirm that the NVIDIA setup is working correctly.
@@ -45,12 +48,7 @@
 1. **Building the binary**
    - In the root directory, execute:
      ```bash
-     bazel build //examples/basic:hello_world_py
-     bazel build //examples/basic:hello_world
+     ./build.sh
      ```
 2. **Running the binary**
-   - In the root directory, execute:
-     ```bash
-     bazel run //examples/basic:hello_world_py
-     bazel run //examples/basic:hello_world
-     ```
+   - The binaries can be found in `build/bin/`
