@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>shunya</name>
+  <version>0.0.1</version>
+  <description>lorem ipsum</description>
+
+  <maintainer email="swathiraojadav@gmail.com">swathi</maintainer>
+  <maintainer email="shravangulvadi@gmail.com">shravan</maintainer>
+  <maintainer email="gramas1996@gmail.com">vatsa</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>std_msgs</depend>
+
+  <exec_depend>ament_cmake</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

@@ -44,6 +44,7 @@ echo "USER: $USER"
 
 HOME="${HOME:-/home/${USER}}"
 CODEBASE_DIR="${CODEBASE_DIR:-${HOME}/shunya}"
+WORKSPACE_DIR="${WORKSPACE_DIR:-${HOME}/workspace}"
 
 # Do not change this, this is linked to the dockerfile name
 DOCKER_USER="ian"
@@ -66,15 +67,27 @@ else
   SSH_FLAGS="-v $HOME/.ssh:/home/$DOCKER_USER/.ssh:ro"
 fi
 
+# allows local root users (like Docker containers) to connect to display.
+xhost +local:root
+
+# Set the DISPLAY_FLAG
+DISPLAY_FLAGS="-e DISPLAY=$DISPLAY \
+               -v /tmp/.X11-unix:/tmp/.X11-unix"
+
 # Script to start the docker and attach the codebase to the container
 docker run \
   $ROOT_USER_FLAG \
   $GPU_FLAGS \
-  -d \
+  $DISPLAY_FLAGS \
   -it \
+  -d \
   --name $NAME \
   -h $NAME \
   $GIT_FLAGS \
   $SSH_FLAGS \
-  -v "$CODEBASE_DIR:/shunya" \
+  -v "$WORKSPACE_DIR:/workspace" \
+  -v "$CODEBASE_DIR:/workspace/src/shunya" \
   $IMAGE_NAME
+
+# Attach current terminal to the container
+docker exec -it dev /bin/bash
