@@ -2,14 +2,12 @@
 
 set -e  # Exit immediately on error
 
-# Create build directory if it doesn't exist
-mkdir -p build
+# Navigate to shunya directory
+cd /shunya
 
-# Move into build directory
-cd build
+# Building using ROS2
+colcon build --symlink-install --cmake-args -DENABLE_CLANG_FORMAT=ON -DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE
 
-# Generate build system
-cmake -DENABLE_CLANG_FORMAT=ON ..
+source install/setup.bash
 
-# Compile the project
-cmake --build . -j$(nproc)  # Use all CPU cores
+echo "✅ Build complete!"
