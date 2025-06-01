@@ -9,7 +9,7 @@ mkdir -p build
 cd build
 
 # Generate build system
-cmake ..
+cmake -DENABLE_CLANG_FORMAT=ON ..
 
 # Compile the project
 cmake --build . -j$(nproc)  # Use all CPU cores
