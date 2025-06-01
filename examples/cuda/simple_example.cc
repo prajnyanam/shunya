@@ -4,4 +4,7 @@
 
 #include <iostream>
 
-int main(int argc, char** argv) { shunya::cuda::examples::RunVecAddExample(); }
+int main(int argc, char** argv) 
+
+
+{ shunya::cuda::examples::RunVecAddExample(); }
