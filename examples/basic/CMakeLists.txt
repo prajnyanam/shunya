@@ -1,2 +1,3 @@
 add_executable(basic_hello_world hello_world.cc)
+add_clang_format(basic_hello_world)
 target_include_directories(basic_hello_world PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
