@@ -18,7 +18,9 @@ RUN apt-get update && apt-get install -y \
     libgl1-mesa-glx \
     bash-completion \
     vim \
-    tmux
+    tmux \
+    clang-tidy \
+    clang-format
 
 # Clone and build Catch2
 RUN git clone https://github.com/catchorg/Catch2.git && \

@@ -1,7 +1,19 @@
 cmake_minimum_required(VERSION 3.16)
 
 # Project name and version
-project(YourProjectName VERSION 1.0 LANGUAGES CXX CUDA)
+project(shunya VERSION 1.0 LANGUAGES CXX CUDA)
+
+set(SHUNYA_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(SHUNYA_CMAKE_TEMPLATES_DIR ${SHUNYA_SOURCE_DIR}/cmake)
+message(STATUS "SHUNYA_SOURCE_DIR: ${SHUNYA_SOURCE_DIR}")
+message(STATUS "SHUNYA_CMAKE_TEMPLATES_DIR: ${SHUNYA_CMAKE_TEMPLATES_DIR}")
+
+#-------------------------------------------------------------------------------------------------
+# Helper scripts to configure shunya build
+
+include(${SHUNYA_CMAKE_TEMPLATES_DIR}/code_formatting_options.cmake)  # configure code auto-formatting tools
+
+#-------------------------------------------------------------------------------------------------
 
 # Automatically detect GPU architecture of the build machine
 set(CMAKE_CUDA_ARCHITECTURES 86)
