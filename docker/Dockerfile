@@ -1,6 +1,8 @@
 # Use the specified NVIDIA CUDA base image
 FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
 
+ENV DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC
+
 # Set the working directory
 WORKDIR /shunya
 
@@ -22,6 +24,23 @@ RUN apt-get update && apt-get install -y \
     clang-tidy \
     clang-format
 
+# Install ROS2 and colcon
+RUN add-apt-repository universe && \
+    apt-get update && \
+    curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" > /etc/apt/sources.list.d/ros2.list && \
+    apt-get update && \
+    apt-get install -y \
+    ros-humble-desktop \
+    python3-colcon-common-extensions
+
+# Source ROS2 setup script, this adds to all the users
+RUN echo "source /opt/ros/humble/setup.bash" >> /etc/bash.bashrc
+
+# Clean up
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # Clone and build Catch2
 RUN git clone https://github.com/catchorg/Catch2.git && \
     cd Catch2 && \
@@ -32,6 +51,7 @@ RUN git clone https://github.com/catchorg/Catch2.git && \
 # Install python requirements
 COPY requirements/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+RUN rm requirements.txt
 
 # Download Git autocomplete script
 RUN curl -o /etc/bash_completion.d/git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
