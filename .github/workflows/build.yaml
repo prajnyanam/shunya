@@ -1,0 +1,24 @@
+name: Build
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: vatsa821/shunya-dev:latest
+      options: --user root
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Make script executable
+        working-directory: ${{ github.workspace }}
+        run: chmod +x ./build.sh
+
+      - name: Run build script
+        working-directory: ${{ github.workspace }}
+        run: ./build.sh
