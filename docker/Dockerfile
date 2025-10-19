@@ -49,30 +49,25 @@ RUN git clone https://github.com/catchorg/Catch2.git && \
     cd .. && rm -rf Catch2
 
 # Install python requirements
-COPY requirements/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-RUN rm requirements.txt
-
-# Download Git autocomplete script
-RUN curl -o /etc/bash_completion.d/git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+COPY --chown=root:root requirements/requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt && rm -f /tmp/requirements.txt
 
 # Enable autocomplete in Bash for all users
-RUN echo "source /etc/bash_completion.d/git-completion.bash" >> /etc/bash.bashrc
+RUN curl -o /etc/bash_completion.d/git-completion.bash \
+      https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash && \
+    echo "source /etc/bash_completion.d/git-completion.bash" >> /etc/bash.bashrc
 
 # Add safe directory for git to avoid dubious ownership warnings
 RUN git config --global --add safe.directory /shunya
 
-
-ARG USER=ian
-ARG GROUP=prajnyanam
-
-# Creates a group with a specified GID. Creates a user with a specified UID, adds them to the group, 
-# sets their home directory, shell, and disables their password. Grants the user sudo privileges by adding them to the sudo group.
-# Configures passwordless sudo for the user by appending a rule to the sudoers file.
-RUN addgroup --gid 1000 $GROUP \
-  && adduser --uid 1000 --ingroup $GROUP --home /home/$USER --shell /bin/bash --disabled-password --gecos "" $USER \
-  && adduser $USER sudo
-
-USER $USER:$GROUP
+ARG USERNAME=ian
+ARG GROUPNAME=prajnyanam
+# Note: we do NOT bake fixed IDs. CI/hosts should override with: --user "$(id -u):$(id -g)"
+# Do NOT switch USER here; keep root as default for maximum portability in CI.
+# In local dev you can still run as the created user:
+#   docker run --user "${USERNAME}" ...
+# In CI prefer host-matched IDs:
+#   docker run --user "$(id -u):$(id -g)" $(for g in $(id -G); do printf -- "--group-add %s " "$g"; done) ...
+RUN groupadd -r "${GROUPNAME}" && useradd -m -r -g "${GROUPNAME}" -s /bin/bash "${USERNAME}"
 
 CMD ["/bin/bash"]
