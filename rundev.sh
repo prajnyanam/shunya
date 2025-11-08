@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 
-NAME="dev"
+DEV_CONTAINER_SUFFIX="dev"
+USER=$(whoami)
+echo "USER: $USER"
+
+# Create container name and sanitize it: replace invalid characters (characteres that are not letter or digits)
+# with hyphens and convert to lowercase.
+DEV_CONTAINER_NAME="${USER}_${DEV_CONTAINER_SUFFIX}"
+DEV_CONTAINER_NAME="${DEV_CONTAINER_NAME//[^A-Za-z0-9_.-]/-}"
+DEV_CONTAINER_NAME="$(echo "$DEV_CONTAINER_NAME" | tr '[:upper:]' '[:lower:]')"
 
 # Usage function
 DEV_ARG=false
@@ -37,10 +45,6 @@ ROOT_USER_FLAG=""
 if [ "$ROOT_USER_ARG" = true ]; then
   ROOT_USER_FLAG="--user root"
 fi
-
-USER=$(whoami)
-
-echo "USER: $USER"
 
 HOME="${HOME:-/home/${USER}}"
 CODEBASE_DIR="${CODEBASE_DIR:-${HOME}/shunya}"
@@ -80,12 +84,12 @@ docker run \
   $DISPLAY_FLAGS \
   -it \
   -d \
-  --name $NAME \
-  -h $NAME \
+  --name $DEV_CONTAINER_NAME \
+  -h $DEV_CONTAINER_NAME \
   $GIT_FLAGS \
   $SSH_FLAGS \
   -v "$CODEBASE_DIR:/shunya" \
   $IMAGE_NAME
 
 # Attach current terminal to the container
-docker exec -it dev /bin/bash
+docker exec -it $DEV_CONTAINER_NAME /bin/bash
