@@ -10,3 +10,4 @@ scipy
 matplotlib
 opencv-python
 pip-tools
+gdown
